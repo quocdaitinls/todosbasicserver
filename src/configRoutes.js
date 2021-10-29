@@ -25,7 +25,7 @@ const configInit = (app) => {
     );
     app.use(
         cookieSession({
-            sameSite: false,
+            sameSite: "none",
             signed: false,
             secure: true,
         })
