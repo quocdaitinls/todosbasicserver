@@ -30,6 +30,9 @@ const configInit = (app) => {
         })
     );
     app.all("*", currentUser);
+    app.get("/", (req, res) => {
+        res.send("Welcome to todos basic server");
+    });
 };
 
 const configAuthRoute = (app) => {
