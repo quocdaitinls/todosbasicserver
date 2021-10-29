@@ -4,20 +4,20 @@ import dotenv from "dotenv";
 
 import {configRoutes} from "./configRoutes.js";
 
+import {MONGO_URI, PORT} from "./constant.js";
+
 dotenv.config();
 
 const app = express();
 
 const connectDB = async () => {
     try {
-        await mongoose.connect(process.env.MONGO_URI);
+        await mongoose.connect(MONGO_URI);
         console.log("Connected to MongoDb.");
     } catch (error) {
         console.log(error);
     }
 };
-
-const PORT = process.env.PORT || 4000;
 
 const start = async () => {
     try {
