@@ -17,12 +17,14 @@ const connectDB = async () => {
     }
 };
 
+const PORT = process.env.PORT || 4000;
+
 const start = async () => {
     try {
         configRoutes(app);
         await connectDB();
-        app.listen(4000, () => {
-            console.log("Listening on port 4000!");
+        app.listen(PORT, () => {
+            console.log("App is listening!");
         });
     } catch (error) {
         console.log(error);
