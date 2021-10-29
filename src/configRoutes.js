@@ -26,7 +26,7 @@ const configInit = (app) => {
     app.use(
         cookieSession({
             signed: false,
-            secure: false,
+            secure: true,
         })
     );
     app.all("*", currentUser);
