@@ -12,15 +12,13 @@ router.post("/api/auth/signin", async function (req, res) {
 
         if (user && password === user.password) {
             const userJwt = createJwtToken(user);
-            // req.session = {
-            //     jwt: userJwt,
-            // };
             return res
                 .status(200)
                 .cookie(ACCESS_TOKEN, userJwt, {
                     sameSite: "none",
                     secure: true,
                     httpOnly: true,
+                    expires: new Date(Date.now() + 900000),
                 })
                 .send(user);
         } else {

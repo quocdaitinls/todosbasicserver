@@ -14,14 +14,12 @@ router.post("/api/auth/signup", async function (req, res) {
         } else {
             const newUser = await User.create({name, username, password});
             const userJwt = createJwtToken(newUser);
-            // req.session = {
-            //     jwt: userJwt,
-            // };
             res.status(201)
                 .cookie(ACCESS_TOKEN, userJwt, {
                     sameSite: "none",
                     secure: true,
                     httpOnly: true,
+                    expires: new Date(Date.now() + 900000),
                 })
                 .send(newUser);
         }
