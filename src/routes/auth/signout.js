@@ -8,6 +8,8 @@ router.post("/api/auth/signout", function (req, res) {
 
     res.status(200)
         .cookie(ACCESS_TOKEN, null, {
+            sameSite: "none",
+            secure: true,
             expires: new Date(),
         })
         .send({});
