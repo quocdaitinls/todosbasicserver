@@ -21,7 +21,6 @@ router.post("/api/auth/signin", async function (req, res) {
                     sameSite: "none",
                     secure: true,
                     httpOnly: true,
-                    expires: new Date(Date.now() + 900000),
                 })
                 .send(user);
         } else {
