@@ -14,24 +14,19 @@ import {showTaskRouter} from "./routes/tasks/show.js";
 import {createTaskRouter} from "./routes/tasks/new.js";
 import {updateTaskRouter} from "./routes/tasks/update.js";
 import {deleteTaskRouter} from "./routes/tasks/delete.js";
+import {responseHeader} from "./middlewares/responseHeader.js";
 
 const configInit = (app) => {
     app.set("trust proxy", true);
     app.use(cookieParser());
     app.use(bodyParser.json());
-    app.use(
-        cors({
-            credentials: true,
-            origin: true,
-        })
-    );
     // app.use(
-    //     cookieSession({
-    //         secure: true,
-    //         sameSite: "none",
-    //         signed: false,
+    //     cors({
+    //         credentials: true,
+    //         origin: true,
     //     })
     // );
+    app.use(responseHeader);
     app.all("*", currentUser);
     app.get("/", (req, res) => {
         res.send("Welcome to todos basic server");
