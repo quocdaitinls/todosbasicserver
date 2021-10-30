@@ -16,17 +16,18 @@ import {updateTaskRouter} from "./routes/tasks/update.js";
 import {deleteTaskRouter} from "./routes/tasks/delete.js";
 import {responseHeader} from "./middlewares/responseHeader.js";
 
+const corsConfig = {
+    credentials: true,
+    origin: true,
+};
+
 const configInit = (app) => {
     app.set("trust proxy", true);
     app.use(cookieParser());
     app.use(bodyParser.json());
-    // app.use(
-    //     cors({
-    //         credentials: true,
-    //         origin: true,
-    //     })
-    // );
-    app.use(responseHeader);
+    app.use(cors(corsConfig));
+    app.options("*", cors(corsConfig));
+    // app.use(responseHeader);
     app.all("*", currentUser);
     app.get("/", (req, res) => {
         res.send("Welcome to todos basic server");
