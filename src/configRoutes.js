@@ -1,6 +1,7 @@
 import bodyParser from "body-parser";
 import cors from "cors";
-import cookieSession from "cookie-session";
+// import cookieSession from "cookie-session";
+import cookieParser from "cookie-parser";
 import currentUser from "./middlewares/currentuser.js";
 
 import {signinRouter} from "./routes/auth/signin.js";
@@ -16,6 +17,7 @@ import {deleteTaskRouter} from "./routes/tasks/delete.js";
 
 const configInit = (app) => {
     app.set("trust proxy", true);
+    app.use(cookieParser());
     app.use(bodyParser.json());
     app.use(
         cors({
@@ -23,13 +25,13 @@ const configInit = (app) => {
             origin: true,
         })
     );
-    app.use(
-        cookieSession({
-            sameSite: "none",
-            signed: false,
-            secure: true,
-        })
-    );
+    // app.use(
+    //     cookieSession({
+    //         secure: true,
+    //         sameSite: "none",
+    //         signed: false,
+    //     })
+    // );
     app.all("*", currentUser);
     app.get("/", (req, res) => {
         res.send("Welcome to todos basic server");
