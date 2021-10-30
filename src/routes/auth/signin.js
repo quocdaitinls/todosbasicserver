@@ -18,8 +18,8 @@ router.post("/api/auth/signin", async function (req, res) {
             return res
                 .status(200)
                 .cookie(ACCESS_TOKEN, userJwt, {
-                    // sameSite: "none",
-                    // secure: true,
+                    sameSite: "none",
+                    secure: true,
                     httpOnly: true,
                     expires: new Date(Date.now() + 900000),
                 })

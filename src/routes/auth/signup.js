@@ -19,8 +19,8 @@ router.post("/api/auth/signup", async function (req, res) {
             // };
             res.status(201)
                 .cookie(ACCESS_TOKEN, userJwt, {
-                    // sameSite: "none",
-                    // secure: true,
+                    sameSite: "none",
+                    secure: true,
                     httpOnly: true,
                     expires: new Date(Date.now() + 900000),
                 })
