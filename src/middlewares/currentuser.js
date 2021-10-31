@@ -2,7 +2,7 @@ import jwt from "jsonwebtoken";
 import {JWT_KEY} from "../constant.js";
 
 const currentUser = (req, res, next) => {
-    console.log(req.cookies);
+    console.log(req);
     const {accessToken} = req.cookies;
     req.currentUser = {};
     if (!accessToken) {

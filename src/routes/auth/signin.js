@@ -1,6 +1,7 @@
 import express from "express";
 import {ACCESS_TOKEN} from "../../constant.js";
 import User from "../../models/User.js";
+import {cookieOptions} from "./utils/cookieOptions.js";
 import {createJwtToken} from "./utils/createJwtToken.js";
 
 const router = express.Router();
@@ -14,12 +15,7 @@ router.post("/api/auth/signin", async function (req, res) {
             const userJwt = createJwtToken(user);
             return res
                 .status(200)
-                .cookie(ACCESS_TOKEN, userJwt, {
-                    sameSite: "none",
-                    secure: true,
-                    httpOnly: true,
-                    expires: new Date(Date.now() + 900000),
-                })
+                .cookie(ACCESS_TOKEN, userJwt, cookieOptions())
                 .send(user);
         } else {
             throw new Error("username or password incorrect");
