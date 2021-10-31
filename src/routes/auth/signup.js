@@ -1,7 +1,5 @@
 import express from "express";
-import {ACCESS_TOKEN} from "../../constant.js";
 import User from "../../models/User.js";
-import {cookieOptions} from "./utils/cookieOptions.js";
 import {createJwtToken} from "./utils/createJwtToken.js";
 
 const router = express.Router();
@@ -15,9 +13,7 @@ router.post("/api/auth/signup", async function (req, res) {
         } else {
             const newUser = await User.create({name, username, password});
             const userJwt = createJwtToken(newUser);
-            res.status(201)
-                .cookie(ACCESS_TOKEN, userJwt, cookieOptions(req))
-                .send(newUser);
+            res.status(201).send({result: newUser, token: userJwt});
         }
     } catch (error) {
         console.log(error);
