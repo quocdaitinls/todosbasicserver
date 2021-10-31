@@ -1,4 +1,5 @@
-export const cookieOptions = (time = 900) => ({
+export const cookieOptions = (req, time = 900) => ({
+    domain: req.get("host"),
     sameSite: "none",
     secure: true,
     httpOnly: true,
