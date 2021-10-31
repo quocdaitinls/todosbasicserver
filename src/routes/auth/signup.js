@@ -16,7 +16,7 @@ router.post("/api/auth/signup", async function (req, res) {
             const newUser = await User.create({name, username, password});
             const userJwt = createJwtToken(newUser);
             res.status(201)
-                .cookie(ACCESS_TOKEN, userJwt, cookieOptions())
+                .cookie(ACCESS_TOKEN, userJwt, cookieOptions(req))
                 .send(newUser);
         }
     } catch (error) {

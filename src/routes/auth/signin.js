@@ -15,7 +15,7 @@ router.post("/api/auth/signin", async function (req, res) {
             const userJwt = createJwtToken(user);
             return res
                 .status(200)
-                .cookie(ACCESS_TOKEN, userJwt, cookieOptions())
+                .cookie(ACCESS_TOKEN, userJwt, cookieOptions(req))
                 .send(user);
         } else {
             throw new Error("username or password incorrect");
